@@ -7,7 +7,7 @@
     <title>User Registration</title>
     <link rel="stylesheet" href="../../public/Css/styles.css" />
   </head>
-  <body>
+  <body class ="register">
     <div class="form-container">
       <div class="header">
         <img src="../../public/Images/logo.png" alt="DonorBridge Logo" />

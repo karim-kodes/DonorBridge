@@ -85,8 +85,43 @@ Donation-system/
    $host = "localhost";
     $user = "root";
    $pass = "";
-    $db = "donation_system";
+   $db = "donation_system";
 
 5. Start Apache & MySQL in XAMPP.
 
 6. Open in browser:
+   http://localhost/Donation-system/
+
+🧑‍💻 Usage
+
+Register as a donor.
+
+Login with your credentials.
+
+Access the dashboard.
+
+Make donations or view requests.
+
+Admins can manage donors, beneficiaries, and assign donations.
+
+🔒 Security
+
+Passwords are hashed using password_hash().
+
+SQL Injection protection using prepared statements.
+
+Role-based access restrictions.
+
+📌 Future Improvements
+
+Email notifications for donation updates.
+
+Reporting & analytics.
+
+File uploads for donation proof.
+
+Laravel migration (future).
+
+📜 License
+
+This project is open-source and available under the MIT License.

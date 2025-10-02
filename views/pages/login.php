@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../public/Css/styles.css" />
     <title>Login</title>
   </head>
-  <body>
+  <body class = "login">
     <div class="form-container">
       <div class="header">
         <img src="../../public/Images/logo.png" alt="DonorBridge" />
