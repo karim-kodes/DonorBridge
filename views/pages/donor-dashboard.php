@@ -1,3 +1,14 @@
+<?php
+// Start session
+session_start();
+
+// Redirect to login if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,14 +34,11 @@
           </div>
         </div>
         <div class="side-links">
-          <div class="link">
+          <div class=" link" >
             <i class="fa-solid fa-gauge"></i>
-            <a href="/" class="current">Dashboard</a>
+            <a href="/" class="current" >Dashboard</a>
           </div>
-          <div class="link">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-            <a href="/">Donors</a>
-          </div>
+
           <div class="link">
             <i class="fa-solid fa-circle-dollar-to-slot"></i>
             <a href="/">Donations</a>
@@ -47,14 +55,24 @@
             <i class="fa-solid fa-gear"></i>
             <a href="/">Settings</a>
           </div>
-          <div class="link">
+          <div class="link last-child">
             <i class="fa-solid fa-right-from-bracket"></i>
-            <a href="/logout">Logout</a>
+            <a href="../../controllers/logout.php">Logout</a>
           </div>
         </div>
       </div>
       <!-- MAIN CONTENT -------------------- -->
       <div class="main">
+        <div class="Welcome-msg">
+          <p>Welcome back, <span><?php echo htmlspecialchars($_SESSION['user_name']); ?> 👋</span></p>
+          <div class="right-btns">
+            <div class="search">
+              <input type="search" placeholder="Search....." />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <button><a href="../../controllers/logout.php">Log Out</a></button>
+          </div>
+        </div>
         <div class="top-cards">
           <div class="card">
             <p>Total Donations</p>
@@ -74,7 +92,7 @@
           </div>
         </div>
         <!-- FIRST CONTAINER //////////////////////// -->
-        <div class="row-1">
+        <div class="row">
           <div class="quick-actions">
             <h3>Quick Actions</h3>
             <div class="buttons">
@@ -97,7 +115,7 @@
             </div>
           </div>
           <div class="donation-table">
-            <h3>Recent Donations</h3>
+            <h3>Your Recent Donations</h3>
             <table class="recent-donations">
               <thead>
                 <tr>
@@ -136,13 +154,13 @@
             </table>
           </div>
           <div class="requests">
-            <h3>Requests</h3>
+            <h3>Your Requests</h3>
             <div class="requests-details">
               <div class="person">
                 <div class="name">
                   <i class="fa-solid fa-user"></i>
                   <div class="username">
-                    <p>Jane Smith</p>
+                    <p>You</p>
                     <span>10 Picnic Baskets</span>
                   </div>
                 </div>
@@ -156,7 +174,7 @@
                 <div class="name">
                   <i class="fa-solid fa-user"></i>
                   <div class="username">
-                    <p>Hassan Ali</p>
+                    <p>You</p>
                     <span>7 blankets </span>
                   </div>
                 </div>
@@ -165,22 +183,65 @@
               <p class="description">Free blankets for the needy orphanages</p>
               <div class="date">2025-07-01</div>
             </div>
+            <div class="ctas">
+              <button><a href="/request">Send a request</a></button>
+              <a href="my-requests">View All</a>
+            </div>
           </div>
-          <div class="impacts">
-            <div class="impacts-cards">
-              <div class="impact">
-                <h2>$12,900</h2>
-                <p>Total donations</p>
+          <div class="campaigns">
+            <h3>Ongoing Campaigns</h3>
+            <div class="campaign-container">
+              <div class="campaign">
+                <div class="top">
+                  <p>Feed the Hungry</p>
+                  <p>70%</p>
+                </div>
+                <div class="progress"></div>
               </div>
-              <div class="impact">
-                <h2>170</h2>
-                <p>Goods/Services</p>
+              <div class="campaign">
+                <div class="top">
+                  <p>Save the Enviroment</p>
+                  <p>70%</p>
+                </div>
+                <div class="progress"></div>
               </div>
-              <div class="impact">
-                <h2>200+</h2>
-                <p>People helped</p>
+              <div class="campaign">
+                <div class="top">
+                  <p>Education For All</p>
+                  <p>70%</p>
+                </div>
+                <div class="progress"></div>
               </div>
             </div>
+          </div>
+          <div class="impacts">
+            <h3>Impacts</h3>
+            <div class="impacts-cards">
+              <div class="impact">
+                <div class="left">
+                  <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                  <p>Total donations</p>
+                </div>
+                <h2>$12,900</h2>
+              </div>
+              <div class="impact">
+                <div class="left">
+                  <i class="fa-solid fa-box-open"></i>
+                  <p>Goods/Services</p>
+                </div>
+                <h2>180</h2>
+              </div>
+              <div class="impact">
+                <div class="left">
+                  <i class="fa-solid fa-users"></i>
+                  <p>People helped</p>
+                </div>
+                <h2>200+</h2>
+              </div>
+            </div>
+          </div>
+          <div class="reports">
+            <h3>Reports</h3>
             <div class="impact-graph">
               <canvas id="donationChart"></canvas>
             </div>

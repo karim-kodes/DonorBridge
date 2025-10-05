@@ -46,7 +46,7 @@ if(isset($_POST['login'])){
             session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
-            header("Location: ../views/pages/dashboard.php");
+            header("Location: ../views/pages/donor-dashboard.php");
             exit();
         }else {
             echo "Invalid password!";

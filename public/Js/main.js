@@ -78,3 +78,17 @@ const donationChart = new Chart(ctx, {
     },
   },
 });
+
+document.querySelectorAll("button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const url = btn.querySelector("a").getAttribute("href");
+    window.location.href = url;
+  });
+});
+//
+document.querySelectorAll(".link").forEach((link) => {
+  link.addEventListener("click", () => {
+    const url = link.querySelector("a").getAttribute("href");
+    window.location.href = url;
+  });
+});
