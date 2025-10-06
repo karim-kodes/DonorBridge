@@ -491,31 +491,80 @@ form button {
 
 .top {
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.top h4 {
+  color: #545454;
+  font-weight: 500;
+}
+.campaign .top p {
+  color: #909090;
+  font-weight: 300;
+}
+
+.values {
+  display: flex;
+  flex-direction: column;
+}
+
+.values p {
+  color: #909090;
+}
+
+.values p span {
+  color: #2f2f2f;
+  font-weight: 600;
+}
+
+.campaign-btns {
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+.campaign-btns button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #ff5757;
+  box-shadow: 0px 2px 10px #ff57577a;
+}
+
+.campaign-btns button a {
+  color: white;
+  text-decoration: none;
+}
+
+.campaign-btns span {
+  background-color: #64db6459;
+  padding: 0.2rem 1rem;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 300;
+  border: 1px solid #64db64;
+}
+.campaign-btns a {
+  text-decoration: none;
+  color: #545454;
+}
 .top p {
   color: #545454;
 }
 
 .progress {
-  height: 0.3rem;
   width: 100%;
-  background-color: #cecece;
-  border-radius: 5px;
-  position: relative;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0.5rem 0;
 }
 
-.progress::after {
-  content: "";
-  width: 70%;
-  height: 100%;
-  border-radius: 5px;
-  top: 0;
-  left: 0;
-  background-color: #ff5757;
-  position: absolute;
+.progress-bar {
+  height: 12px;
+  background: linear-gradient(90deg, #ff5757, #545454);
+  border-radius: 10px;
 }
 
 /* IMPACT SECTION /////////////////////////////// */
@@ -772,6 +821,12 @@ form button {
 
   .campaigns {
     grid-column: span 6;
+  }
+
+  .values {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .impacts {

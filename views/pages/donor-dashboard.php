@@ -1,4 +1,11 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include '../../config/db.php';
+
+$sql = "SELECT * FROM campaigns WHERE status='active'";
+$result = mysqli_query($conn, $sql);
 // Start session
 session_start();
 
@@ -34,9 +41,9 @@ if (!isset($_SESSION['user_id'])) {
           </div>
         </div>
         <div class="side-links">
-          <div class=" link" >
+          <div class="link">
             <i class="fa-solid fa-gauge"></i>
-            <a href="/" class="current" >Dashboard</a>
+            <a href="/" class="current">Dashboard</a>
           </div>
 
           <div class="link">
@@ -64,7 +71,13 @@ if (!isset($_SESSION['user_id'])) {
       <!-- MAIN CONTENT -------------------- -->
       <div class="main">
         <div class="Welcome-msg">
-          <p>Welcome back, <span><?php echo htmlspecialchars($_SESSION['user_name']); ?> 👋</span></p>
+          <p>
+            Welcome back,
+            <span
+              ><?php echo htmlspecialchars($_SESSION['user_name']); ?>
+              👋</span
+            >
+          </p>
           <div class="right-btns">
             <div class="search">
               <input type="search" placeholder="Search....." />
@@ -190,28 +203,34 @@ if (!isset($_SESSION['user_id'])) {
           </div>
           <div class="campaigns">
             <h3>Ongoing Campaigns</h3>
+
             <div class="campaign-container">
+            <?php while ($row = mysqli_fetch_assoc($result)):
+              $progress = ($row['raised_amount'] / $row['target_amount']) * 100;
+            ?>
               <div class="campaign">
                 <div class="top">
-                  <p>Feed the Hungry</p>
-                  <p>70%</p>
+                  <h4><?= htmlspecialchars($row['name']) ?></h4>
+                  <p>
+                    <?= htmlspecialchars($row['description']) ?>
+                  </p>
                 </div>
-                <div class="progress"></div>
-              </div>
-              <div class="campaign">
-                <div class="top">
-                  <p>Save the Enviroment</p>
-                  <p>70%</p>
+                <div class="values">
+                  <p>Raised Amount: <span>$<?= $row['raised_amount'] ?></span></p>
+                  <p>Target Amount: <span>$<?= $row['target_amount'] ?></span></p>
                 </div>
-                <div class="progress"></div>
-              </div>
-              <div class="campaign">
-                <div class="top">
-                  <p>Education For All</p>
-                  <p>70%</p>
+                <div class="progress">
+                  <div class="progress-bar" style="width: <?= $progress ?>%;"></div>
                 </div>
-                <div class="progress"></div>
+                <div class="campaign-btns">
+                  <button><a href="/donate">Donate</a></button>
+                  <span>Active</span>
+                  <a href="campaign.php?id=<?= $row['id'] ?>">View Details</a>
+                </div>
               </div>
+              <?php endwhile; ?>  
+              <!-- //////// -->
+              
             </div>
           </div>
           <div class="impacts">
