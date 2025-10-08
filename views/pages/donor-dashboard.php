@@ -3,7 +3,26 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include '../../config/db.php';
+// TOTAL DONATIONS (sum of all donation amount)
+$totalDonationQuery = "SELECT SUM(amount) AS total_donations FROM donations";
+$totalDonationResult = mysqli_query($conn, $totalDonationQuery);
+$totalDonations = mysqli_fetch_assoc($totalDonationResult)['total_donations'] ?? 0 ;
 
+// ACTIVE DONORS (unique users who donated)
+$activeDonorsQuery = "SELECT COUNT(DISTINCT user_id) AS active_donors FROM donations";
+$activeDonorsResult = mysqli_query($conn, $activeDonorsQuery);
+$activeDonors = mysqli_fetch_assoc($activeDonorsResult)['active_donors'] ?? 0 ;
+
+// PENDING REQUESTS
+$pendingRequestsQuery = "SELECT COUNT(*) AS pending_requests FROM requests WHERE status='pending'";
+$pendingRequestsResult = mysqli_query($conn, $pendingRequestsQuery);
+$pendingRequests = mysqli_fetch_assoc($pendingRequestsResult)['pending_requests'] ?? 0;
+
+$completedDonationsQuery = "SELECT COUNT(*) AS completed_donations FROM donations WHERE status='completed'";
+$completedDonationsResult = mysqli_query($conn, $completedDonationsQuery);
+$completedDonations = mysqli_fetch_assoc($completedDonationsResult)['completed_donations'] ?? 0;
+
+// ONGOING CAMPAIGNS
 $sql = "SELECT * FROM campaigns WHERE status='active'";
 $result = mysqli_query($conn, $sql);
 // Start session
@@ -89,19 +108,19 @@ if (!isset($_SESSION['user_id'])) {
         <div class="top-cards">
           <div class="card">
             <p>Total Donations</p>
-            <h2>$5,450</h2>
+            <h2>$<?= number_format($totalDonations)?></h2>
           </div>
           <div class="card">
             <p>Active Donors</p>
-            <h2>120</h2>
+            <h2><?= $activeDonors ?></h2>
           </div>
           <div class="card">
             <p>Pending Requests</p>
-            <h2>34</h2>
+            <h2><?= $pendingRequests?></h2>
           </div>
           <div class="card">
             <p>Completed Donations</p>
-            <h2>87</h2>
+            <h2><?=$completedDonations?></h2>
           </div>
         </div>
         <!-- FIRST CONTAINER //////////////////////// -->
